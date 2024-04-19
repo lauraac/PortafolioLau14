@@ -94,7 +94,7 @@ section {
 .logo {
   font-size: 4.6rem;
   color: var(--text-color);
-  font-weight: 600;
+  font-weight: 500;
   cursor: pointer;
 }
 .navbar {
