@@ -61,3 +61,33 @@ const typed = new Typed('.multiple-text', {
 });
 
 /* validacion de formulario */
+
+document.getElementById('languageToggle').addEventListener('click', function() {
+  // Alternar el idioma guardado en el cuerpo del documento para referencia global
+  var currentLang = document.body.dataset.lang || 'es';
+  var newLang = currentLang === 'es' ? 'en' : 'es';
+  document.body.dataset.lang = newLang;  // Guardar el nuevo idioma en el cuerpo para uso global
+
+  // Seleccionar todos los elementos que deberían cambiar de idioma
+  var elements = document.querySelectorAll('.lang');
+
+  elements.forEach(el => {
+      if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+          if (el.type === 'submit') {
+              // Actualizar el valor del botón de enviar
+              el.value = el.dataset[newLang];
+          } else {
+              // Actualizar placeholders para inputs y textareas
+              el.placeholder = el.dataset[newLang];
+          }
+      } else {
+          // Actualizar el contenido de texto para otros elementos
+          el.innerHTML = el.dataset[newLang];
+      }
+
+      // Actualizar el atributo de idioma del elemento
+      el.dataset.lang = newLang;
+  });
+});
+
+

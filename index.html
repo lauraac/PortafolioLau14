@@ -26,11 +26,12 @@
         <i class='bx bx-menu' id="menu-icon"></i>
 
         <nav class="navbar">
-            <a href="#Accueil" class="active">Inicio</a>
-            <a href="#apropos">Propósito</a>
-            <a href="#compétences">Competencias</a>
-            <a href="#Formation">Formación</a>
-            <a href="#contact">Contacto</a>
+            <a href="#Accueil" class="active lang" data-en="Home" data-es="Inicio" data-lang="es">Inicio</a>
+            <a href="#apropos" class="lang" data-en="Purpose" data-es="Propósito" data-lang="es">Propósito</a>
+            <a href="#compétences" class="lang" data-en="Skills" data-es="Competencias" data-lang="es">Competencias</a>
+            <a href="#Formation" class="lang" data-en="Education" data-es="Formación" data-lang="es">Formación</a>
+            <a href="#contact" class="lang" data-en="Contact" data-es="Contacto" data-lang="es">Contacto</a>
+            <a href="#" id="languageToggle">Lenguaje</a>
         </nav>
     </header>
     <!--menu flotante-->
@@ -39,51 +40,74 @@
 
     <section class="Accueil" id="Accueil">
         <div class="Accueil-content">
-            <h3> </h3>
-
+            <!-- <h3 class="lang" data-en="Greetings!" data-es="¡Saludos!" data-lang="es">¡Saludos!</h3> -->
             <h1><span class="multiple-text"></span></h1>
-            <p>¡Hola! Mi nombre es Laura Alfonso Contreras, soy un desarrollador SR. Móvil con habilidades en React Native, Android, Ios y HTML, CSS, JavaScript, 
-                En mi portafolio encontrarás algunos datos, de como puedes contactarme.
-                Soy apasionada por la tecnología, orientada a los detalles y siempre estoy aprendiendo. ¡Gracias por visitar mi
-                portafolio!</p>
+            <p class="lang" data-en="Hello! My name is Laura Alfonso, I'm a SENIOR MOBILE DEVELOPER with skills in JavaScript, TypeScript, React Native, Android, Xcode, HTML5, CSS3. 
+                    <br>I'm passionate about technology, detail-oriented, and always learning.
+                    <br> In my portfolio, you will find some data on how you can contact me.
+                     Thank you for visiting my portfolio!" data-es="¡Hola! Mi nombre es Laura Alfonso, soy un DEVELOPER MOBILE SR con habilidades en JavaScript, TypeScript, React Native, Android, Xcode, HTML5, CSS3. 
+                    <br>Soy apasionada por la tecnología, orientada a los detalles y siempre estoy aprendiendo.
+                    <br> En mi portafolio encontrarás algunos datos, de como puedes contactarme.
+                     ¡Gracias por visitar mi portafolio!" data-lang="es">¡Hola! Mi nombre es Laura Alfonso, soy un
+                DEVELOPER MOBILE SR con habilidades en JavaScript, TypeScript, React Native, Android, Xcode, HTML5,
+                CSS3.
+                <br>Soy apasionada por la tecnología, orientada a los detalles y siempre estoy aprendiendo.
+                <br> En mi portafolio encontrarás algunos datos, de como puedes contactarme.
+                ¡Gracias por visitar mi portafolio!
+            </p>
+            <a href="tel:+5534633490" class="btn lang" data-en="Contact Me" data-es="Contáctame" data-lang="es">Contáctame</a>
 
-            <a href="tel:+5534633490" class="btn">Contactame</a>
         </div>
-
         <div class="Accueil-img">
-            <img src="images/lau.jpeg" alt="foto perfil">
+            <img src="images/lau.jpeg" alt="Laura's profile picture">
         </div>
-
     </section>
 
     <!-- À propos section design -->
     <section class="apropos" id="apropos">
-
         <div class="apropos-content">
-            <h2 class="heading">Propósito <span>Laura</span></h2>
-            <h3>Developper Móvil</h3>
-            <h4>Nombre: <span>Laura Alfonso</span></h4>
-            <h4>Localización : <span>México</span></h4>
-            <h4>Hobbies : <span>Leer, Cantar,</span></h4>
-
-
+            <h2 class="heading lang" data-en="Purpose Laura" data-es="Propósito Laura" data-lang="es">Propósito <span
+                    class="lang" data-en="Laura" data-es="Laura" data-lang="es">Laura</span></h2>
+            <h3 class="lang" data-en="Mobile Developer" data-es="Desarrollador Móvil" data-lang="es">Developper Móvil
+            </h3>
+            <h4 class="lang" data-en="Name: <span>Laura Alfonso</span>" data-es="Nombre: <span>Laura Alfonso</span>"
+                data-lang="es">Nombre: <span> Laura Alfonso </span></h4>
+            <h4 class="lang" data-en="Location: <span>Mexico</span>" data-es="Localización: <span>México</span>"
+                data-lang="es">Localización: <span> México </span></h4>
+            <h4 class="lang" data-en="Hobbies: <span>Reading, Singing, Gaming</span>"
+                data-es="Hobbies: <span>Leer, Cantar, Jugar</span>" data-lang="es">Hobbies: <span> Leer, Cantar,
+                    Jugar</span></h4>
             <div class="social-media">
-                <a href="docs//Laura.pdf" download="Laura-CV" target="_blank"><i
-                        class='bx bxs-file-pdf'></i></a>
+                <!-- Iconos sin texto no necesitan traducción -->
+                <a href="docs//Laura.pdf" download="Laura-CV" target="_blank"><i class='bx bxs-file-pdf'></i></a>
                 <a href="https://github.com/lauraac/" target="_blank"><i class='bx bxl-github'></i></a>
-                <a href="https://www.linkedin.com/in/laura-alfonso-974689107/" target="_blank"><i class='bx bxl-linkedin'></i></a>
+                <a href="https://www.linkedin.com/in/laura-alfonso-974689107/" target="_blank"><i
+                        class='bx bxl-linkedin'></i></a>
                 <a href="mailto:lauraac140231@gmail.com" target="_blank"><i class='bx bx-envelope'></i></a>
                 <a href="tel:+5534633490"><i class='bx bx-phone'></i></a>
             </div>
-            <a href="docs/Laura.pdf" download="CV_Laura" class="btn">
-                Descargar
-                CV</a>
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <div style="padding: 10px;">
+                    <a href="docs/Laura CV Español.pdf" download="CV_Laura" class="btn lang"
+                        data-en="Download Spanish CV" data-es="Descarga CV Español" data-lang="es">
+                        Descarga CV Español
+                    </a>
+                </div>
+                <div style="padding: 10px;">
+                    <a href="docs/Laura CV Ingles.pdf" download="CV_Laura" class="btn lang"
+                        data-en="Download English CV" data-es="Descarga CV Ingles" data-lang="es">
+                        Descarga CV Ingles
+                    </a>
+                </div>
+            </div>
         </div>
     </section>
-
     <!-- compétences section design -->
     <section class="compétences" id="compétences">
-        <h2 class="heading">Habilidades <span>Fuertes</span></h2>
+        <h2 class="heading lang" data-en="Skills <span>Strong</span>" data-es="Habilidades <span>Fuertes</span>"
+            data-lang="es">Habilidades <span class="lang" data-en="Strong" data-es="Fuertes"
+                data-lang="es">Fuertes</span>
+        </h2>
 
         <div class="compétences-container">
             <div class="compétences-box">
@@ -95,11 +119,14 @@
                 <img src="./images/icon/js.png" alt="html" style="height: 45px">
                 <img src="./images/icon/css.png" alt="html" style="height: 45px">
                 <img src="./images/icon/python.png" alt="html" style="height: 45px">
-                
-                
+
+
                 <h3>Front end</h3>
                 <span>REACT NATIVE / XCODE / ANDROID STUDIO/ HTML5 / GITHUB / JAVA SCRIPT / CSS3 /PYTHON </span>
-                <p>Creación de sitios web responsivos y aplicaciones móviles.</p>
+                <p class="lang" data-en="Creation of responsive websites and mobile apps."
+                    data-es="Creación de sitios web responsivos y aplicaciones móviles." data-lang="es">
+                    Creación de sitios web responsivos y aplicaciones móviles.
+                </p>
 
             </div>
 
@@ -111,7 +138,11 @@
                 <img src="./images/icon/postman.png" alt="html" style="height: 45px">
                 <h3>Back end</h3>
                 <span> ORANCLE APEX / POSTGRE SQL / SQL / MONGODB / POSTMAN </span>
-                <p>Desarrollo de sitios web y aplicaciones, creación y gestión de bases de datos</p>
+                <p class="lang" data-en="Development of websites and applications, creation and management of databases"
+                    data-es="Desarrollo de sitios web y aplicaciones, creación y gestión de bases de datos"
+                    data-lang="es">
+                    Desarrollo de sitios web y aplicaciones, creación y gestión de bases de datos
+                </p>
 
             </div>
 
@@ -123,7 +154,8 @@
                 <img src="./images/icon/git.png" alt="html" style="height: 45px">
                 <img src="./images/icon/grafana.png" alt="html" style="height: 45px">
                 <img src="./images/icon/django.png" alt="html" style="height: 45px">
-                <h3>Ambiente de trabajo</h3>
+                <h3 class="lang" data-en="Work Environment" data-es="Ambiente de trabajo" data-lang="es">Ambiente de
+                    trabajo</h3>
                 <span> LOOKER / TWILIO / APPIUM / FIGMA / GIT / GRAFANA / DJANGO </span>
                 <p>Frameworks</p>
             </div>
@@ -133,7 +165,8 @@
                 <img src="./images/icon/word.png" alt="html" style="height: 45px">
                 <img src="./images/icon/power.png" alt="html" style="height: 45px">
                 <img src="./images/icon/photo.png" alt="html" style="height: 45px">
-                <h3>Paquete de oficina</h3>
+                <h3 class="lang" data-en="Office Package" data-es="Paquete de oficina" data-lang="es">Paquete de oficina
+                </h3>
                 <span> Microsoft Excel / Word / PowerPoint / Adobe Photoshop</span>
                 <p></p>
 
@@ -144,8 +177,11 @@
             <div class="compétences-box">
                 <img src="images/mexico.png" alt="html" style="height: 45px">
                 <img src="images/eu.png" alt="spain" style="height: 45px;">
-                <h3>Lenguajes</h3>
-                <span> Español: Nativo / Ingles: nivel A1</span>
+                <h3 class="lang" data-en="Languages" data-es="Lenguajes" data-lang="es">Lenguajes</h3>
+                <span class="lang" data-en="Spanish: Native / English: Level A1"
+                    data-es="Español: Nativo / Ingles: nivel A1" data-lang="es">Español: Nativo / Ingles: nivel
+                    A1</span>
+
                 <p>
                 </p>
                 <!--<a href="tel:+33765700307" class="btn">Contact</a>-->
@@ -154,31 +190,39 @@
 
 
         <div class="soft-skills">
-            <h2 class="heading">Suaves <span>competencias</span></h2>
+            <h2 class="heading lang" data-en="Soft <span>Skills</span>" data-es="Suaves <span>competencias</span>"
+                data-lang="es">Suaves <span class="lang" data-en="Skills" data-es="competencias"
+                    data-lang="es">competencias</span></h2>
 
             <div class="compétences-container">
                 <div class="compétences-box">
                     <img src="./images/icon/equipo.png" alt="html" style="height: 45px">
 
-                    <h3>Trabajo en equipo</h3>
+                    <h3 class="lang" data-en="Teamwork" data-es="Trabajo en equipo" data-lang="es">Trabajo en equipo
+                    </h3>
+
 
                     <p></p>
                 </div>
                 <div class="compétences-box">
                     <img src="./images/icon/resolucion.png" alt="html" style="height: 45px">
-                    <h3>Resolución de problemas</h3>
+                    <h3 class="lang" data-en="Problem Solving" data-es="Resolución de problemas" data-lang="es">
+                        Resolución de problemas</h3>
                     <p></p>
                 </div>
                 <div class="compétences-box">
                     <img src="./images/icon/scrum.png" alt="html" style="height: 45px">
                     <img src="./images/icon/tiempo.png" alt="html" style="height: 45px">
                     <img src="./images/icon/organizaciones.png" alt="html" style="height: 45px">
-                    <h3> METODOLOGÍA SCRUM / GESTIÓN DEL TIEMPO /  ORGANIZACIONES</h3>
+                    <h3 class="lang" data-en="SCRUM METHODOLOGY / TIME MANAGEMENT / ORGANIZATIONS"
+                        data-es="METODOLOGÍA SCRUM / GESTIÓN DEL TIEMPO / ORGANIZACIONES" data-lang="es">METODOLOGÍA
+                        SCRUM / GESTIÓN DEL TIEMPO / ORGANIZACIONES</h3>
                     <p></p>
                 </div>
                 <div class="compétences-box">
                     <img src="./images/icon/adptabilidad.png" alt="html" style="height: 45px">
-                    <h3>Adaptabilidad a los cambios.</h3>
+                    <h3 class="lang" data-en="Adaptability to Changes" data-es="Adaptabilidad a los cambios"
+                        data-lang="es">Adaptabilidad a los cambios</h3>
                     <p></p>
                 </div>
             </div>
@@ -186,140 +230,201 @@
 
     <!-- Formation section design -->
 
-    <section class="Formation" id="Formation">
-        <h2 class="heading">
-            Formación / <span> Certificaciones </span></h2>
+    <h2 class="heading lang" data-en="Education / <span>Certifications</span>"
+        data-es="Formación / <span>Certificaciones</span>" data-lang="es">Formación / <span class="lang"
+            data-en="Certifications" data-es="Certificaciones" data-lang="es">Certificaciones</span></h2>
 
-        <div class="Formation-container">
-            <div class="Formation-box">
-                <img src="images/certificados/laboratoria.png" alt="">
-                <div class="Formation-layer">
-                    <h4>Diplomado : <span>Laboratoria </span> <br> 24 de Septiembre de 2020 </h4>
-                    <p>Bootcamp de Programación, especializado en Frontend y UX</p>
-                    <a href="https://www.laboratoria.la/"><i class='bx bx-link-external'></i></a>
-                </div>
+
+    <div class="Formation-container">
+        <div class="Formation-box">
+            <img src="images/certificados/laboratoria.png" alt="">
+            <div class="Formation-layer">
+                <h4>Diplomado : <span>Laboratoria </span> <br> 24 de Septiembre de 2020 </h4>
+                <p>Bootcamp de Programación, especializado en Frontend y UX</p>
+                <a href="https://www.laboratoria.la/"><i class='bx bx-link-external'></i></a>
             </div>
-
-            <div class="Formation-box">
-                
-                <img src="images/certificados/reactnative.png" alt="">
-                
-                <div class="Formation-layer">
-                    <h4>Certificación : <span> React Native </span></h4>
-                    <p> React Native, es un framework de código abierto,Se utiliza para desarrollar aplicaciones moviles.​</p>
-                    <a href="https://www.udemy.com/certificate/UC-5c26cf65-b335-44f2-a0d2-fdccc60002d7/" target="_blank"><i class='bx bx-link-external'></i></a>
-
-            </div>                
         </div>
 
-            <div class="Formation-box">
-                <img src="images/certificados/js.png" alt="">
-                <div class="Formation-layer">
-                    <h4>Certificación : <span> JavaScript</span></h4>
-                    <p>JavaScript es un lenguaje de programación interpretado, dialecto del estándar ECMAScript</p>
-                    <p> 17 /02 /2020</p>
-                    <a href="https://www.sololearn.com/Certificate/CT-NPYUR4VH/pdf" target="_blank"><i class='bx bx-link-external'></i></a>
+        <div class="Formation-box">
 
-                </div>
+            <img src="images/certificados/reactnative.png" alt="">
+
+            <div class="Formation-layer">
+                <h4 class="lang" data-en="Certification: <span>React Native</span>"
+                    data-es="Certificación: <span>React Native</span>" data-lang="es">Certificación: <span>React
+                        Native</span></h4>
+                <p class="lang" data-en="React Native is an open-source framework, used to develop mobile applications."
+                    data-es="React Native, es un framework de código abierto, se utiliza para desarrollar aplicaciones móviles."
+                    data-lang="es">
+                    React Native, es un framework de código abierto, se utiliza para desarrollar aplicaciones móviles.
+                </p>
+
+                <a href="https://www.udemy.com/certificate/UC-5c26cf65-b335-44f2-a0d2-fdccc60002d7/" target="_blank"><i
+                        class='bx bx-link-external'></i></a>
+
             </div>
-
-            <div class="Formation-box">
-                <img src="images/certificados/python.png" alt="">
-                <div class="Formation-layer">
-                    <h4>Certificación : <span> Python</span></h4>
-                    <p> Python es un lenguaje de alto nivel de programación</p>
-                    <p> 11 /07 /2022</p>
-                    <a href="https://www.udemy.com/certificate/UC-103aae36-45e3-4ebb-a9e5-ca526ceebca2/" target="_blank"><i class='bx bx-link-external'></i></a>
-
-                </div>
-            </div>
-            <div class="Formation-box">
-                <img src="images/certificados/django.png" alt="">
-                <div class="Formation-layer">
-                    <h4>Certificación : <span> Django</span></h4>
-                    <p> Django es un framework de desarrollo web de código abierto, escrito en Python</p>
-                    <p> 09/07 /2022</p>
-                    <a href="https://www.udemy.com/certificate/UC-8dbfea5e-ebe1-4709-995a-72b83ca4429f/" target="_blank"><i class='bx bx-link-external'></i></a>
-                </div>
-            </div>
-            <div class="Formation-box">
-                <img src="images/certificados/css.png" alt="">
-                <div class="Formation-layer">
-                    <h4>Certificación : <span> CSS</span></h4>
-                    <p> Estilos, lenguaje de diseño gráfico y estructurado escrito en un lenguaje de marcado.​ </p>
-                    <p> 16/12 /2019</p>
-                    <a href="https://www.sololearn.com/Certificate/CT-R9DLPCQV/pdf" target="_blank"><i class='bx bx-link-external'></i></a>
-
-                </div>
-            </div>
-            <div class="Formation-box">
-                <img src="images/certificados/html.png" alt="">
-                <div class="Formation-layer">
-                    <h4>Certificación : <span> HTML</span></h4>
-                    <p> Lenguaje de marcado de hipertexto</p>
-                    <p> 14/11 /2019</p>
-                    <a href="https://www.sololearn.com/Certificate/CT-AGH4MPUW/pdf" target="_blank"><i class='bx bx-link-external'></i></a>
-
-                </div>
-            </div>
-            <div class="Formation-box">
-                <img src="images/certificados/redux.png" alt="">
-                <div class="Formation-layer">
-                    <h4>Certificación : <span> React + Redux</span></h4>
-                    <p> Redux es una librería JavaScript de código abierto para el manejo del estado de las aplicaciones</p>
-                    <p> 23/09 /2020</p>
-                    <a href="https://www.sololearn.com/Certificate/CT-MZIF0FM5/pdf" target="_blank"><i class='bx bx-link-external'></i></a>
-
-                </div>
-            </div>
-            <div class="Formation-box">
-                <img src="images/certificados/sql.png" alt="">
-                <div class="Formation-layer">
-                    <h4>Certificación : <span> SQL</span></h4>
-                    <p> SQL es un lenguaje específico de dominio, diseñado para administrar, y recuperar información de sistemas de gestión de bases de datos relacionales</p>
-                    <p> 17/ 07 /2020</p>
-                    <a href="https://www.sololearn.com/Certificate/CT-SRGLXAAM/pdf" target="_blank"><i class='bx bx-link-external'></i></a>
-
-                </div>
-            </div>
-            <div class="Formation-box">
-                <img src="images/certificados/jquery.png" alt="">
-                <div class="Formation-layer">
-                    <h4>Certificación : <span> JQuery</span></h4>
-                    <p> jQuery es una biblioteca multiplataforma de JavaScript</p>
-                    <p> 09/ 07 /2020</p>
-                    <a href="https://www.sololearn.com/Certificate/CT-QCTNPEKJ/pdf" target="_blank"><i class='bx bx-link-external'></i></a>
-
-                </div>
-            </div>
-
         </div>
+
+        <div class="Formation-box">
+            <img src="images/certificados/js.png" alt="">
+            <div class="Formation-layer">
+                <h4 class="lang" data-en="Certification: <span>JavaScript</span>"
+                    data-es="Certificación: <span>JavaScript</span>" data-lang="es">Certificación:
+                    <span>JavaScript</span></h4>
+                <p class="lang"
+                    data-en="JavaScript is an interpreted programming language, a dialect of the ECMAScript standard."
+                    data-es="JavaScript es un lenguaje de programación interpretado, dialecto del estándar ECMAScript"
+                    data-lang="es">
+                    JavaScript es un lenguaje de programación interpretado, dialecto del estándar ECMAScript
+                </p>
+                <p class="lang" data-en="17/02/2020" data-es="17/02/2020" data-lang="es">17/02/2020</p>
+
+                <a href="https://www.sololearn.com/Certificate/CT-NPYUR4VH/pdf" target="_blank"><i
+                        class='bx bx-link-external'></i></a>
+
+            </div>
+        </div>
+
+        <div class="Formation-box">
+            <img src="images/certificados/python.png" alt="">
+            <div class="Formation-layer">
+                <h4 class="lang" data-en="Certification: <span>Python</span>"
+                    data-es="Certificación: <span>Python</span>" data-lang="es">Certificación: <span>Python</span></h4>
+                <p class="lang" data-en="Python is a high-level programming language."
+                    data-es="Python es un lenguaje de alto nivel de programación" data-lang="es">
+                    Python es un lenguaje de alto nivel de programación
+                </p>
+                <p class="lang" data-en="11/07/2022" data-es="11/07/2022" data-lang="es">11/07/2022</p>
+
+                <a href="https://www.udemy.com/certificate/UC-103aae36-45e3-4ebb-a9e5-ca526ceebca2/" target="_blank"><i
+                        class='bx bx-link-external'></i></a>
+
+            </div>
+        </div>
+        <div class="Formation-box">
+            <img src="images/certificados/django.png" alt="">
+            <div class="Formation-layer">
+                <h4 class="lang" data-en="Certification: <span>Django</span>"
+                    data-es="Certificación: <span>Django</span>" data-lang="es">Certificación: <span>Django</span></h4>
+                <p class="lang" data-en="Django is an open-source web development framework, written in Python."
+                    data-es="Django es un framework de desarrollo web de código abierto, escrito en Python"
+                    data-lang="es">
+                    Django es un framework de desarrollo web de código abierto, escrito en Python
+                </p>
+                <p class="lang" data-en="09/07/2022" data-es="09/07/2022" data-lang="es">09/07/2022</p>
+
+                <a href="https://www.udemy.com/certificate/UC-8dbfea5e-ebe1-4709-995a-72b83ca4429f/" target="_blank"><i
+                        class='bx bx-link-external'></i></a>
+            </div>
+        </div>
+        <div class="Formation-box">
+            <img src="images/certificados/css.png" alt="">
+            <div class="Formation-layer">
+                <h4 class="lang" data-en="Certification: <span>CSS</span>" data-es="Certificación: <span>CSS</span>"
+                    data-lang="es">Certificación: <span>CSS</span></h4>
+                <p class="lang" data-en="Styles, graphic and structured design language written in a markup language."
+                    data-es="Estilos, lenguaje de diseño gráfico y estructurado escrito en un lenguaje de marcado."
+                    data-lang="es">
+                    Estilos, lenguaje de diseño gráfico y estructurado escrito en un lenguaje de marcado.
+                </p>
+                <p class="lang" data-en="16/12/2019" data-es="16/12/2019" data-lang="es">16/12/2019</p>
+
+                <a href="https://www.sololearn.com/Certificate/CT-R9DLPCQV/pdf" target="_blank"><i
+                        class='bx bx-link-external'></i></a>
+
+            </div>
+        </div>
+        <div class="Formation-box">
+            <img src="images/certificados/html.png" alt="">
+            <div class="Formation-layer">
+                <h4 class="lang" data-en="Certification: <span>HTML</span>" data-es="Certificación: <span>HTML</span>" data-lang="es">Certificación: <span>HTML</span></h4>
+                <p class="lang" data-en="Hypertext Markup Language" data-es="Lenguaje de marcado de hipertexto" data-lang="es">
+                    Lenguaje de marcado de hipertexto
+                </p>
+                <p class="lang" data-en="14/11/2019" data-es="14/11/2019" data-lang="es">14/11/2019</p>
+                
+                <a href="https://www.sololearn.com/Certificate/CT-AGH4MPUW/pdf" target="_blank"><i
+                        class='bx bx-link-external'></i></a>
+
+            </div>
+        </div>
+        <div class="Formation-box">
+            <img src="images/certificados/redux.png" alt="">
+            <div class="Formation-layer">
+                <h4 class="lang" data-en="Certification: <span>React + Redux</span>" data-es="Certificación: <span>React + Redux</span>" data-lang="es">Certificación: <span>React + Redux</span></h4>
+                <p class="lang" data-en="Redux is an open-source JavaScript library for managing application state." data-es="Redux es una librería JavaScript de código abierto para el manejo del estado de las aplicaciones" data-lang="es">
+                    Redux es una librería JavaScript de código abierto para el manejo del estado de las aplicaciones
+                </p>
+                <p class="lang" data-en="23/09/2020" data-es="23/09/2020" data-lang="es">23/09/2020</p>
+                
+                <a href="https://www.sololearn.com/Certificate/CT-MZIF0FM5/pdf" target="_blank"><i
+                        class='bx bx-link-external'></i></a>
+
+            </div>
+        </div>
+        <div class="Formation-box">
+            <img src="images/certificados/sql.png" alt="">
+            <div class="Formation-layer">
+                <h4 class="lang" data-en="Certification: <span>SQL</span>" data-es="Certificación: <span>SQL</span>" data-lang="es">Certificación: <span>SQL</span></h4>
+<p class="lang" data-en="SQL is a domain-specific language designed to manage and retrieve information from relational database management systems." data-es="SQL es un lenguaje específico de dominio, diseñado para administrar y recuperar información de sistemas de gestión de bases de datos relacionales" data-lang="es">
+    SQL es un lenguaje específico de dominio, diseñado para administrar y recuperar información de sistemas de gestión de bases de datos relacionales
+</p>
+<p class="lang" data-en="17/07/2020" data-es="17/07/2020" data-lang="es">17/07/2020</p>
+
+                <a href="https://www.sololearn.com/Certificate/CT-SRGLXAAM/pdf" target="_blank"><i
+                        class='bx bx-link-external'></i></a>
+
+            </div>
+        </div>
+        <div class="Formation-box">
+            <img src="images/certificados/jquery.png" alt="">
+            <div class="Formation-layer">
+                <h4 class="lang" data-en="Certification: <span>jQuery</span>" data-es="Certificación: <span>jQuery</span>" data-lang="es">Certificación: <span>jQuery</span></h4>
+                <p class="lang" data-en="jQuery is a cross-platform JavaScript library." data-es="jQuery es una biblioteca multiplataforma de JavaScript" data-lang="es">
+                    jQuery es una biblioteca multiplataforma de JavaScript
+                </p>
+                <p class="lang" data-en="09/07/2020" data-es="09/07/2020" data-lang="es">09/07/2020</p>
+                
+                <a href="https://www.sololearn.com/Certificate/CT-QCTNPEKJ/pdf" target="_blank"><i
+                        class='bx bx-link-external'></i></a>
+
+            </div>
+        </div>
+
+    </div>
     </section>
 
     <!-- contact section design -->
     <section class="contact" id="contact">
-        <h2 class="heading">Contacto-<span>Laura</span></h2>
+        <h2 class="heading lang" data-en="Contact-<span>Laura</span>" data-es="Contacto-<span>Laura</span>" data-lang="es">Contacto-<span class="lang" data-en="Laura" data-es="Laura" data-lang="es">Laura</span></h2>
+
 
         <form id="formulario" action="enviar.php" method="POST" name="enviar" enctype="multipart/form-data">
             <div class="input-box">
-                <input id="nombre" name="nombre" type="text" placeholder="Nombre y apellido" required>
-                <input id="email" name="email" type="email" placeholder="Dirección de correo electrónico" required>
+                <input class="lang" id="nombre" name="nombre" type="text" placeholder="Nombre y apellido" data-en="Full Name" data-es="Nombre y apellido" required>
+                <input class="lang" id="email" name="email" type="email" placeholder="Dirección de correo electrónico" data-en="Email Address" data-es="Dirección de correo electrónico" required>
             </div>
             <div class="input-box">
-                <input id="telefono" name="telefono" type="number" placeholder="Número de teléfono" minlength="7"
-                    maxlength="10">
-                <input id="asunto" name="asunto" type="text" placeholder="Objeto del mensaje">
+                <input class="lang" id="telefono" name="telefono" type="number" placeholder="Número de teléfono" data-en="Phone Number" data-es="Número de teléfono" minlength="7" maxlength="10">
+                <input class="lang" id="asunto" name="asunto" type="text" placeholder="Objeto del mensaje" data-en="Subject" data-es="Objeto del mensaje">
             </div>
-            <textarea name="mensaje" id="mensaje" cols="30" rows="10" placeholder="Mensaje" required></textarea>
-            <input class="btn" type="submit" id="btn" name="btn" value="Enviar un correo electrónico">
+            <textarea class="lang" name="mensaje" id="mensaje" cols="30" rows="10" placeholder="Mensaje" data-en="Message" data-es="Mensaje" required></textarea>
+            <!-- <input class="btn" type="submit" id="btn" name="btn" value="Enviar un correo electrónico" data-en="Send Email" data-es="Enviar un correo electrónico"> -->
+            <input class="btn lang" type="submit" id="btn" name="btn" value="Enviar un correo electrónico" data-en="Send Email" data-es="Enviar un correo electrónico">
+
         </form>
         
+        
+
     </section>
 
     <!-- footer design -->
     <footer class="footer">
         <div class="footer-text">
-            <p>Copyright &copy; 2024 Laura Alfonso | Todos los derechos Reservados </p>
+            <p class="lang" data-en="Copyright &copy; 2024 Laura Alfonso | All Rights Reserved" data-es="Copyright &copy; 2024 Laura Alfonso | Todos los derechos Reservados" data-lang="es">
+                Copyright &copy; 2024 Laura Alfonso | Todos los derechos Reservados
+            </p>
+            
         </div>
 
         <div class="footer-iconTop">
