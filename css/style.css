@@ -131,6 +131,11 @@ section {
   box-shadow: 0 0 2rem var(--maincolor);
   animation: floatImage 4s ease-in-out infinite;
 }
+
+.justificado {
+  text-align: justify;
+  
+}
 @keyframes floatImage {
   0% {
     transform: translateY(0);
