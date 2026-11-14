@@ -1,0 +1,13 @@
+version: 1
+name: formsubmit
+slug: formsubmit
+protocol: http
+port: 4500
+scenarios:
+  - name: default
+    path: ./fixtures.js
+    default: true
+generatedFrom:
+  type: spec
+  mode: static
+  path: ../../formsubmit.openapi.json

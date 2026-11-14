@@ -1,0 +1,7 @@
+simulation: contact
+routing: path
+mocks:
+  - name: formsubmit
+    routeKey: formsubmit
+    origin: formsubmit.co
+    path: postman/mocks/formsubmit

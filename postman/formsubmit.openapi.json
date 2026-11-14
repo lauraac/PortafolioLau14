@@ -1,0 +1,17 @@
+{
+  "openapi": "3.0.3",
+  "info": { "title": "FormSubmit contact transport (local verification)", "version": "1.0.0", "description": "Request based on official AJAX documentation. Response examples are local defensive test fixtures, not observations of the live recipient or guarantees of delivery." },
+  "servers": [{ "url": "https://formsubmit.co" }],
+  "paths": {
+    "/ajax/lauraac140231@gmail.com": {
+      "post": {
+        "requestBody": { "required": true, "content": { "application/json": { "schema": { "type": "object", "required": ["name", "email", "message"], "properties": { "name": { "type": "string" }, "email": { "type": "string", "format": "email" }, "message": { "type": "string" } } } } } },
+        "responses": {
+          "200": { "description": "Parse JSON acceptance explicitly; HTTP 200 alone is insufficient", "content": { "application/json": { "example": { "success": "true", "message": "The form was submitted successfully." } } } },
+          "429": { "description": "Rate limited", "content": { "application/json": { "example": { "success": "false" } } } },
+          "500": { "description": "Service error" }
+        }
+      }
+    }
+  }
+}

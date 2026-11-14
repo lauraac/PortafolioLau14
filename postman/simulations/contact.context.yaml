@@ -1,0 +1,30 @@
+purpose:
+  stands_in_for: FormSubmit AJAX contact submission
+  unblocks: Local validation of the real portfolio submit handler against controlled HTTP responses
+assumptions:
+  - id: static-cross-origin-transport
+    status: supported
+    claim: FormSubmit documents cross-origin AJAX submissions from static pages.
+    reason: Official documentation provides fetch with JSON POST to /ajax/recipient; GitHub Pages serves static HTML and JavaScript.
+    verification: Reviewed official documentation. No live GitHub Pages URL supplied and no browser CORS verification completed.
+    source: https://formsubmit.co/ajax-documentation; https://formsubmit.co/documentation; https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages
+    updated_at: "2026-11-13"
+  - id: recipient-activation-and-delivery
+    status: unknown
+    claim: The recipient address is activated and receives messages submitted from the deployed portfolio.
+    reason: The user saw Check Your Email during their prior test. There is no access to the activation email or inbox.
+    verification: No live message submitted during this change; no delivery confirmed. Official FAQ says activation is required and pending submissions may be retained.
+    source: https://formsubmit.co/help; user report
+    updated_at: "2026-11-13"
+  - id: response-fixtures
+    status: unknown
+    claim: Controlled response fixtures match every current response of the live AJAX service.
+    reason: Fixtures exercise defensive handling; they are not observed responses for this recipient. Postman is signed out, so published owner mocks could not be searched. Orbit and direct FormSubmit fetch were unavailable from the shell.
+    verification: The real handler passed 19 HTTP response scenarios plus delayed response, duplicate guard, validation, local file protection, and honeypot checks. Postman simulation startup was denied access to local dataset files; ran the same fixtures directly with Node instead. Tests do not establish live response completeness, browser CORS, activation, or delivery.
+    source: verify-contact.cjs; postman/mocks/formsubmit/fixtures.js; postman/formsubmit.openapi.json
+    updated_at: "2026-11-13"
+fingerprints:
+  - id: local-validation
+    date: "2026-11-13"
+    commit: null
+    cli: Postman 1.82.0; Node 24.19.0
