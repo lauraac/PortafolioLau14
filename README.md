@@ -27,6 +27,8 @@ Los nombres deben coincidir exactamente. Si no tienes aún los archivos, sus esp
 
 ## Formulario de contacto
 
+El envío se realiza directamente desde el navegador con FormSubmit; no requiere ni almacena contraseñas o claves privadas. Antes de recibir mensajes, confirma el correo de activación enviado por FormSubmit al buzón destinatario. El formulario valida nombre no vacío, formato de correo y un mensaje de al menos 10 caracteres significativos; la respuesta de aceptación del servicio no garantiza la entrega en la bandeja de entrada.
+
 El formulario env?a JSON mediante fetch al endpoint AJAX de FormSubmit: https://formsubmit.co/ajax/lauraac140231@gmail.com. El destino sigue siendo Gmail; el correo alternativo y el tel?fono son enlaces directos. No requiere backend propio y utiliza el mecanismo cross-origin documentado para sitios est?ticos como GitHub Pages.
 
 - El visitante permanece dentro del portafolio. Los estados de env?o, aceptaci?n, activaci?n pendiente, error y tiempo de espera est?n en espa?ol e ingl?s.

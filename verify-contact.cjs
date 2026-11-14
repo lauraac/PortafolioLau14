@@ -7,8 +7,9 @@ const base = process.env.CONTACT_TEST_BASE || 'http://127.0.0.1:4010/formsubmit'
 function setup(scenario, { valid = true, protocol = 'https:', honey = '' } = {}) {
   const nodes = new Map();
   function element() {
-    return { textContent: '', dataset: {}, attributes: {}, disabled: true, events: {},
+    return { textContent: '', dataset: {}, attributes: {}, disabled: true, events: {}, value: '', validity: { valid: true }, customValidity: '',
       classList: { toggle() { return true; }, remove() {} },
+      setCustomValidity(value) { this.customValidity = value; this.validity.valid = !value; },
       setAttribute(k,v) { this.attributes[k] = v; }, getAttribute(k) { return this.attributes[k]; },
       addEventListener(k,v) { this.events[k] = v; }, querySelectorAll() { return []; },
       querySelector(selector) { return select('form ' + selector); } };
@@ -16,15 +17,27 @@ function setup(scenario, { valid = true, protocol = 'https:', honey = '' } = {})
   const select = key => { if (!nodes.has(key)) nodes.set(key, element()); return nodes.get(key); };
   const form = select('#contact-form');
   form.action = 'https://formsubmit.co/ajax/lauraac140231@gmail.com';
-  form.reportValidity = () => valid;
+  form.reportValidity = () => valid && ['name', 'email', 'message'].every(name => select('form [name="' + name + '"]').validity.valid);
   form.resetCount = 0;
   form.reset = () => form.resetCount++;
   const data = { name: 'Local QA only', email: 'qa@example.com', message: 'HTTP fixture test, never delivered.', _subject: 'Test', _template: 'table', _captcha: 'false', _honey: honey };
+  for (const [name, value] of Object.entries({ name: data.name, email: data.email, message: data.message })) {
+    const field = select('form [name="' + name + '"]');
+    field.value = value;
+    field.validity.valid = name !== 'email' || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+  }
   const requests = [];
   const context = {
     document: { documentElement: { lang: 'es' }, querySelector(selector) { return selector.includes('data-active-certificate') ? null : select(selector); }, querySelectorAll() { return []; }, getElementById() { return null; } },
     window: { location: { protocol, href: 'https://example.github.io/portfolio/#contacto' } },
-    FormData: function() { return Object.entries(data); },
+    FormData: function() {
+      return Object.entries({
+        ...data,
+        name: select('form [name="name"]').value,
+        email: select('form [name="email"]').value,
+        message: select('form [name="message"]').value,
+      });
+    },
     AbortController,
     setTimeout: (callback, ms) => setTimeout(callback, scenario === 'timeout' ? 60 : ms), clearTimeout,
     fetch: async (url, options) => {
@@ -40,7 +53,7 @@ function setup(scenario, { valid = true, protocol = 'https:', honey = '' } = {})
   const submit = () => form.events.submit({ preventDefault() { prevented++; } });
   const language = lang => vm.runInContext(`setLanguage('${lang}')`,context);
   const key = () => vm.runInContext('contactStatusKey',context);
-  return { form, button, status, requests, submit, language, key, prevented: () => prevented };
+  return { form, button, status, requests, submit, language, key, field: name => select('form [name="' + name + '"]'), prevented: () => prevented };
 }
 (async () => {
   for (const scenario of ['accepted-string','accepted-boolean','activation','activation-with-true','false-string','false-boolean','missing-success','unexpected-success','conflicting-error','conflicting-errors','http-500','rate-limit','html-activation','invalid-json','null-json','array-json','redirect','disconnect','timeout']) {
@@ -74,6 +87,22 @@ function setup(scenario, { valid = true, protocol = 'https:', honey = '' } = {})
     const env=setup('accepted-string',options); await env.submit();
     assert.equal(env.requests.length,0); assert.equal(env.form.resetCount,0); assert.equal(env.button.disabled,false);
   }
+  for (const field of ['name', 'email', 'message']) {
+    const env = setup('accepted-string');
+    const node = env.field(field);
+    node.value = field === 'message' ? '          ' : '   ';
+    if (field === 'email') node.validity.valid = false;
+    await env.submit();
+    assert.equal(env.requests.length, 0, `Reject invalid ${field}`);
+    assert.ok(node.customValidity, `Show a validation message for ${field}`);
+  }
+  const trimmed = setup('accepted-string');
+  trimmed.field('name').value = '  Local QA only  ';
+  trimmed.field('message').value = ' HTTP fixture test, never delivered. ';
+  await trimmed.submit();
+  const sent = JSON.parse(trimmed.requests[0].options.body);
+  assert.equal(sent.name, 'Local QA only');
+  assert.equal(sent.message, 'HTTP fixture test, never delivered.');
   const slow=setup('slow'); const pending=slow.submit(); await slow.submit(); await pending;
   assert.equal(slow.requests.length,1); assert.equal(slow.key(),'formSuccess');
   console.log('PASS invalid fields, file:// protection, honeypot rejection, delayed response and duplicate guard.');

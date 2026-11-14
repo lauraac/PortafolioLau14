@@ -59,6 +59,9 @@ const translations = {
     "formName": "Nombre",
     "formEmail": "Correo electrónico",
     "formMessage": "Mensaje",
+    "formNameInvalid": "Escribe tu nombre.",
+    "formEmailInvalid": "Escribe un correo electrónico válido.",
+    "formMessageInvalid": "Escribe un mensaje de al menos 10 caracteres, sin contar espacios al inicio o al final.",
     "formSend": "Enviar mensaje",
     "backTop": "Volver arriba ↑",
     "aboutText": ", con experiencia en la creación, evolución y mantenimiento de aplicaciones y soluciones digitales.",
@@ -171,6 +174,9 @@ const translations = {
     "formName": "Name",
     "formEmail": "Email",
     "formMessage": "Message",
+    "formNameInvalid": "Enter your name.",
+    "formEmailInvalid": "Enter a valid email address.",
+    "formMessageInvalid": "Enter a message of at least 10 characters, excluding leading and trailing spaces.",
     "formSend": "Send message",
     "backTop": "Back to top ↑",
     "aboutSubtitle": "I turn ideas into scalable, functional, user-centered digital solutions.",
@@ -275,6 +281,22 @@ function setContactStatus(key) {
   renderContactState();
 }
 
+function validateContactFields() {
+  const name = contactForm.querySelector('[name="name"]');
+  const email = contactForm.querySelector('[name="email"]');
+  const message = contactForm.querySelector('[name="message"]');
+
+  name.setCustomValidity(name.value.trim() ? '' : translations[currentLanguage].formNameInvalid);
+  email.setCustomValidity(
+    email.value.trim() && email.validity.valid ? '' : translations[currentLanguage].formEmailInvalid,
+  );
+  message.setCustomValidity(
+    message.value.trim().length >= 10 ? '' : translations[currentLanguage].formMessageInvalid,
+  );
+
+  return contactForm.reportValidity();
+}
+
 document.querySelector("#year").textContent = new Date().getFullYear();
 
 function setLanguage(lang) {
@@ -330,12 +352,15 @@ navLinks.querySelectorAll("a").forEach((link) =>
 // Do not use native submission: the visitor stays on the portfolio, even on errors.
 contactForm.addEventListener('submit', async (event) => {
   event.preventDefault();
-  if (contactSending || !contactForm.reportValidity()) return;
+  if (contactSending || !validateContactFields()) return;
   if (!['https:', 'http:'].includes(window.location.protocol)) {
     setContactStatus('formLocal');
     return;
   }
   const payload = Object.fromEntries(new FormData(contactForm));
+  payload.name = payload.name.trim();
+  payload.email = payload.email.trim();
+  payload.message = payload.message.trim();
   if (payload._honey) {
     setContactStatus('formError');
     return;
