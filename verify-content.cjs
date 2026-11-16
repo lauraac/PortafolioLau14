@@ -25,8 +25,8 @@ const nodes = [...html.matchAll(/<([a-z0-9]+)\b([^>]*\bdata-i18n(?:-[a-z-]+)?="[
 });
 const mapped=new Map();
 const document={documentElement:{lang:'es'},querySelector(selector){if(selector.includes('data-active-certificate'))return null;if(!mapped.has(selector))mapped.set(selector,element());return mapped.get(selector);},
-  querySelectorAll(selector){if(selector==='[data-i18n]')return nodes.filter(n=>n.dataset.i18n); const match=selector.match(/^\[([^\]]+)\]$/);return match?nodes.filter(n=>n.attributes[match[1]]):[];},getElementById(){return null;}};
-const context={document,Date};vm.createContext(context);vm.runInContext(js,context);
+  querySelectorAll(selector){if(selector==='[data-i18n]')return nodes.filter(n=>n.dataset.i18n); const match=selector.match(/^\[([^\]]+)\]$/);return match?nodes.filter(n=>n.attributes[match[1]]):[];},getElementById(){return null;},addEventListener(){}};
+const context={document,Date,window:{matchMedia(){return {matches:false,addEventListener(){}};}}};vm.createContext(context);vm.runInContext(js,context);
 for(const lang of ['es','en','es']){
   vm.runInContext(`setLanguage('${lang}')`,context);
   assert.equal(document.documentElement.lang,lang);assert.equal(document.title,t[lang].pageTitle);

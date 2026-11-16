@@ -339,21 +339,52 @@ function updateMenuLabel() {
   menuButton.setAttribute('aria-label', translations[currentLanguage][key]);
 }
 
+const mobileMenuQuery = window.matchMedia('(max-width: 700px)');
+function setMenuOpen(isOpen, { returnFocus = false } = {}) {
+  const shouldOpen = isOpen && mobileMenuQuery.matches;
+  navLinks.classList.toggle('open', shouldOpen);
+  menuButton.setAttribute('aria-expanded', String(shouldOpen));
+  navLinks.inert = mobileMenuQuery.matches && !shouldOpen;
+  navLinks.setAttribute('aria-hidden', String(mobileMenuQuery.matches && !shouldOpen));
+  updateMenuLabel();
+  if (returnFocus) menuButton.focus();
+}
+
+setMenuOpen(false);
+
 languageButton.addEventListener("click", () =>
-  setLanguage(currentLanguage === "es" ? "en" : "es"),
+  {
+    setLanguage(currentLanguage === "es" ? "en" : "es");
+    setMenuOpen(false);
+  },
 );
 menuButton.addEventListener("click", () => {
-  const isOpen = navLinks.classList.toggle("open");
-  menuButton.setAttribute("aria-expanded", String(isOpen));
-  updateMenuLabel();
+  setMenuOpen(menuButton.getAttribute('aria-expanded') !== 'true');
 });
-navLinks.querySelectorAll("a").forEach((link) =>
-  link.addEventListener("click", () => {
-    navLinks.classList.remove("open");
-    menuButton.setAttribute("aria-expanded", "false");
-    updateMenuLabel();
-  }),
-);
+navLinks.querySelectorAll("a").forEach((link) => {
+  link.addEventListener("click", () => setMenuOpen(false));
+});
+document.addEventListener('click', (event) => {
+  if (
+    menuButton.getAttribute('aria-expanded') === 'true' &&
+    !navLinks.contains(event.target) &&
+    !menuButton.contains(event.target)
+  ) {
+    setMenuOpen(false);
+  }
+});
+document.addEventListener('keydown', (event) => {
+  if (event.key === 'Escape' && menuButton.getAttribute('aria-expanded') === 'true') {
+    setMenuOpen(false, { returnFocus: true });
+  }
+});
+mobileMenuQuery.addEventListener('change', (event) => {
+  setMenuOpen(false);
+  if (!event.matches) {
+    navLinks.inert = false;
+    navLinks.setAttribute('aria-hidden', 'false');
+  }
+});
 
 // Do not use native submission: the visitor stays on the portfolio, even on errors.
 contactForm.addEventListener('submit', async (event) => {

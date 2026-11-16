@@ -28,8 +28,8 @@ function setup(scenario, { valid = true, protocol = 'https:', honey = '' } = {})
   }
   const requests = [];
   const context = {
-    document: { documentElement: { lang: 'es' }, querySelector(selector) { return selector.includes('data-active-certificate') ? null : select(selector); }, querySelectorAll() { return []; }, getElementById() { return null; } },
-    window: { location: { protocol, href: 'https://example.github.io/portfolio/#contacto' } },
+    document: { documentElement: { lang: 'es' }, querySelector(selector) { return selector.includes('data-active-certificate') ? null : select(selector); }, querySelectorAll() { return []; }, getElementById() { return null; }, addEventListener() {} },
+    window: { location: { protocol, href: 'https://example.github.io/portfolio/#contacto' }, matchMedia() { return { matches: false, addEventListener() {} }; } },
     FormData: function() {
       return Object.entries({
         ...data,
