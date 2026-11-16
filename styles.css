@@ -299,11 +299,22 @@ h3 {
 }
 
 .project-art {
+  position: relative;
   aspect-ratio: 16 / 9;
   overflow: hidden;
 }
 
-.project-art img {
+.project-art .project-preview {
+  position: absolute;
+  inset: 0;
+}
+
+.project-art [hidden] {
+  display: none;
+}
+
+.project-art img,
+.project-art video {
   display: block;
   width: 100%;
   height: 100%;

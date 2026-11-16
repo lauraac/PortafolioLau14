@@ -406,6 +406,34 @@ contactForm.addEventListener('submit', async (event) => {
   }
 });
 
+const projectReleaseVideo = document.querySelector('#project-release-video');
+if (projectReleaseVideo && typeof IntersectionObserver !== 'undefined') {
+  const projectReleasePreview = document.querySelector('#project-release-preview');
+  let projectVideoIsVisible = false;
+  let projectVideoHasEnded = false;
+  const updateProjectVideoPlayback = () => {
+    if (projectVideoIsVisible && document.visibilityState === 'visible' && !projectVideoHasEnded) {
+      const playback = projectReleaseVideo.play();
+      if (playback && typeof playback.catch === 'function') {
+        playback.catch((error) => console.warn('Could not autoplay the project video:', error));
+      }
+    } else {
+      projectReleaseVideo.pause();
+    }
+  };
+  projectReleaseVideo.addEventListener('ended', () => {
+    projectVideoHasEnded = true;
+    projectReleaseVideo.hidden = true;
+    projectReleasePreview.hidden = false;
+  });
+  const projectVideoObserver = new IntersectionObserver((entries) => {
+    projectVideoIsVisible = entries.some((entry) => entry.isIntersecting && entry.intersectionRatio >= 0.5);
+    updateProjectVideoPlayback();
+  }, { threshold: [0, 0.5] });
+  projectVideoObserver.observe(projectReleaseVideo);
+  document.addEventListener('visibilitychange', updateProjectVideoPlayback);
+}
+
 setLanguage("es");
 
 // Visor de certificaciones
