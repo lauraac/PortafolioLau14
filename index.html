@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="es">
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -53,9 +53,9 @@
           <button
             class="lang-toggle"
             type="button"
-            aria-label="Change language to English"
+            aria-label="Cambiar idioma a español"
           >
-            EN
+            ES
           </button>
         </div>
       </nav>
@@ -102,13 +102,20 @@
           <p class="eyebrow" data-i18n="aboutEyebrow">PERFIL PROFESIONAL</p>
           <h2 data-i18n="aboutTitle">Desarrollo de software que conecta tecnología, innovación y personas</h2>
           <p class="about-subtitle" data-i18n="aboutSubtitle">Transformo ideas en soluciones digitales escalables, funcionales y centradas en el usuario.</p>
-          <div class="about-copy">
+          <div class="about-intro">
             <p><span data-i18n="aboutIntro">Soy </span><strong data-i18n="aboutIdentity">Laura Alfonso Contreras, Senior Software Developer especializada en desarrollo Mobile</strong><span data-i18n="aboutText">, con experiencia en la creación, evolución y mantenimiento de aplicaciones y soluciones digitales.</span></p>
-            <p><span data-i18n="aboutExperienceIntro">Mi trayectoria incluye el desarrollo de aplicaciones para </span><strong data-i18n="aboutPlatforms">Android, Android TV y React Native</strong><span data-i18n="aboutExperience">, así como conocimientos de desarrollo web, integración de APIs REST, comunicación con servicios backend y diseño de arquitecturas de software escalables y mantenibles.</span></p>
-            <p><span data-i18n="aboutStackIntro">Trabajo con tecnologías como </span><strong data-i18n="aboutStack">Kotlin, Jetpack Compose, JavaScript, HTML, CSS, Firebase y Git</strong><span data-i18n="aboutArchitecture">, aplicando principios de Clean Architecture, MVVM y buenas prácticas de ingeniería de software.</span></p>
-            <p><span data-i18n="aboutServices">Tengo experiencia integrando servicios externos, SDKs, sistemas de autenticación, notificaciones push, persistencia local y funcionalidades conectadas con plataformas backend. También participo en procesos de pruebas, optimización, resolución de incidencias y publicación de aplicaciones en </span><strong>Google Play Store</strong>.</p>
             <p data-i18n="aboutApproach">Me apasiona transformar necesidades de negocio en productos digitales intuitivos, seguros y eficientes, combinando pensamiento analítico, creatividad y atención a la experiencia del usuario.</p>
-            <p class="about-objective"><strong data-i18n="aboutObjective">Mi objetivo es seguir creciendo profesionalmente y contribuir a proyectos tecnológicos internacionales, aportando soluciones de calidad, capacidad de adaptación y una mentalidad de mejora continua.</strong></p>
+          </div>
+          <div class="about-panels">
+            <article class="about-block">
+              <h3 data-i18n="aboutMobileTitle">Desarrollo Mobile</h3>
+              <p><span data-i18n="aboutExperienceIntro">Mi trayectoria incluye el desarrollo de aplicaciones para </span><strong data-i18n="aboutPlatforms">Android, Android TV y React Native</strong><span data-i18n="aboutExperience">, así como conocimientos de desarrollo web, integración de APIs REST, comunicación con servicios backend y diseño de arquitecturas de software escalables y mantenibles.</span></p>
+            </article>
+            <article class="about-block">
+              <h3 data-i18n="aboutQualityTitle">Calidad y producción</h3>
+              <p><span data-i18n="aboutStackIntro">Trabajo con tecnologías como </span><strong data-i18n="aboutStack">Kotlin, Jetpack Compose, JavaScript, HTML, CSS, Firebase y Git</strong><span data-i18n="aboutArchitecture">, aplicando principios de Clean Architecture, MVVM y buenas prácticas de ingeniería de software.</span></p>
+              <p><span data-i18n="aboutServices">Tengo experiencia integrando servicios externos, SDKs, sistemas de autenticación, notificaciones push, persistencia local y funcionalidades conectadas con plataformas backend. También participo en procesos de pruebas, optimización, resolución de incidencias y publicación de aplicaciones en </span><strong>Google Play Store</strong>.</p>
+            </article>
           </div>
           <div class="skill-tags" aria-label="Tecnologías" data-i18n-aria-label="technologies">
             <span>Kotlin</span><span>Jetpack Compose</span><span>Java</span
@@ -117,6 +124,10 @@
             ><span>Firebase</span><span>Crashlytics</span><span>REST APIs</span
             ><span>Git</span><span>Android TV</span
             ><span>Google Play Console</span>
+          </div>
+          <div class="about-objective">
+            <h3 data-i18n="aboutObjectiveTitle">Mi objetivo profesional</h3>
+            <p data-i18n="aboutObjective">Mi objetivo es seguir creciendo profesionalmente y contribuir a proyectos tecnológicos internacionales, aportando soluciones de calidad, capacidad de adaptación y una mentalidad de mejora continua.</p>
           </div>
           <div class="info-grid">
             <article class="panel">

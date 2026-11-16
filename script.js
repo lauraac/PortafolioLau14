@@ -16,6 +16,9 @@ const translations = {
     "aboutEyebrow": "PERFIL PROFESIONAL",
     "aboutTitle": "Desarrollo de software que conecta tecnología, innovación y personas",
     "aboutSubtitle": "Transformo ideas en soluciones digitales escalables, funcionales y centradas en el usuario.",
+    "aboutMobileTitle": "Desarrollo Mobile",
+    "aboutQualityTitle": "Calidad y producción",
+    "aboutObjectiveTitle": "Mi objetivo profesional",
     "aboutSectionTitle": "Más allá del código",
     "creativityTitle": "Creatividad y diseño",
     "creativityText": "Disfruto imaginar, diseñar y construir aplicaciones desde una idea hasta convertirlas en productos reales. Me interesa especialmente la experiencia de usuario (UX) y la calidad de cada detalle.",
@@ -142,6 +145,9 @@ const translations = {
     "contactMe": "Contact me",
     "aboutEyebrow": "PROFESSIONAL PROFILE",
     "aboutTitle": "Software development that connects technology, innovation, and people",
+    "aboutMobileTitle": "Mobile Development",
+    "aboutQualityTitle": "Quality and Production",
+    "aboutObjectiveTitle": "My Professional Objective",
     "aboutText": ", with experience creating, evolving, and maintaining applications and digital solutions.",
     "aiTitle": "AI-assisted development",
     "aiText": "I use artificial intelligence tools to support research, code analysis, test creation, and productivity, while reviewing and validating the results.",
@@ -258,7 +264,7 @@ const translations = {
 };
 
 // Contact delivery uses the FormSubmit AJAX endpoint declared in the HTML form.
-let currentLanguage = "es";
+let currentLanguage = "en";
 const menuButton = document.querySelector(".menu-toggle");
 const navLinks = document.querySelector(".nav-links");
 const languageButton = document.querySelector(".lang-toggle");
@@ -434,7 +440,7 @@ if (projectReleaseVideo && typeof IntersectionObserver !== 'undefined') {
   document.addEventListener('visibilitychange', updateProjectVideoPlayback);
 }
 
-setLanguage("es");
+setLanguage("en");
 
 // Visor de certificaciones
 const certModal = document.getElementById("certModal");
