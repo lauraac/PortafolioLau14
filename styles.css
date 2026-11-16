@@ -289,15 +289,21 @@ h3 {
     transform: scaleX(1);
   }
 }
-@media (hover: none) {
-  .skill-tags span:active {
-    transform: translateY(-1px);
-    border-color: var(--pink);
-    background-color: #394251;
-  }
-  .skill-tags span:active::after {
-    transform: scaleX(1);
-  }
+.skill-tags span.is-touch-active {
+  transform: translateY(-1px);
+  border-color: var(--pink);
+  background-color: #394251;
+}
+.skill-tags span.is-touch-active::after {
+  transform: scaleX(1);
+}
+.skill-tags.is-visible span {
+  animation: skill-tag-entrance 420ms ease both;
+  animation-delay: calc(var(--skill-tag-index, 0) * 35ms);
+}
+@keyframes skill-tag-entrance {
+  from { opacity: 0.55; transform: translateY(5px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 .info-grid,
 .cards {
@@ -764,4 +770,5 @@ h3 {
 @media (prefers-reduced-motion: reduce) {
   .skill-tags span,
   .skill-tags span::after { transition: none; }
+  .skill-tags.is-visible span { animation: none; }
 }

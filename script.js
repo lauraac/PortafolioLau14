@@ -473,6 +473,41 @@ if (projectReleaseVideo && typeof IntersectionObserver !== 'undefined') {
 
 setLanguage("en");
 
+const skillTags = document.querySelector('.skill-tags');
+if (skillTags) {
+  const skillChips = [...skillTags.querySelectorAll('span')];
+  skillChips.forEach((chip, index) => chip.style.setProperty('--skill-tag-index', index));
+
+  if ('IntersectionObserver' in window) {
+    const skillTagsObserver = new IntersectionObserver((entries, observer) => {
+      if (entries.some((entry) => entry.isIntersecting)) {
+        skillTags.classList.toggle('is-visible', true);
+        observer.disconnect();
+      }
+    }, { threshold: 0.15 });
+    skillTagsObserver.observe(skillTags);
+  } else {
+    skillTags.classList.toggle('is-visible', true);
+  }
+
+  let activeSkillChip;
+  let skillChipTimeout;
+  skillTags.addEventListener('pointerdown', (event) => {
+    if (event.pointerType !== 'touch') return;
+    const chip = event.target.closest('span');
+    if (!chip || !skillTags.contains(chip)) return;
+
+    clearTimeout(skillChipTimeout);
+    activeSkillChip?.classList.remove('is-touch-active');
+    activeSkillChip = chip;
+    chip.classList.add('is-touch-active');
+    skillChipTimeout = setTimeout(() => {
+      chip.classList.remove('is-touch-active');
+      if (activeSkillChip === chip) activeSkillChip = null;
+    }, 700);
+  });
+}
+
 // Visor de certificaciones
 const certModal = document.getElementById("certModal");
 const certModalImage = certModal?.querySelector("img");
