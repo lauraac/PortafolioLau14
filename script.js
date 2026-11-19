@@ -127,7 +127,7 @@ const translations = {
     "formSuccess": "FormSubmit aceptó tu mensaje. ¡Gracias por contactarme!",
     "formError": "No se pudo confirmar el envío. Tu texto se conserva; puedes intentarlo más tarde o escribirme directamente por correo.",
     "formActivation": "El formulario aún requiere activar el correo de destino en FormSubmit. No se ha confirmado el envío. Por favor, contacta a Laura directamente por correo.",
-    "formUncertain": "¡Gracias por escribir! No recibimos confirmación del servicio; es posible que tu mensaje ya se haya enviado. Espera unos minutos antes de volver a intentarlo para evitar duplicados.",
+    "formUncertain": "¡Gracias por escribir! El servicio no confirmó el envío. Conservamos tu mensaje; espera unos minutos antes de volver a intentarlo para evitar duplicados.",
     "formUnavailable": "Para enviar sin salir de esta página, activa JavaScript o utiliza los enlaces de correo.",
     "formLocal": "Abre el portafolio desde su dirección web para enviar el mensaje. También puedes usar los enlaces de correo."
   },
@@ -257,7 +257,7 @@ const translations = {
     "formSuccess": "FormSubmit accepted your message. Thank you for reaching out!",
     "formError": "We could not confirm your submission. Your text has been kept; try again later or email me directly.",
     "formActivation": "This form still requires activation of the recipient email address in FormSubmit. Submission has not been confirmed. Please email Laura directly.",
-    "formUncertain": "Thanks for reaching out! We didn't receive confirmation from the service, so your message may already have been sent. Please wait a few minutes before trying again to avoid duplicates.",
+    "formUncertain": "Thanks for reaching out! The service didn't confirm the submission. Your message is kept; please wait a few minutes before trying again to avoid duplicates.",
     "formUnavailable": "To send without leaving this page, enable JavaScript or use the email links.",
     "formLocal": "Open the portfolio at its web address to send your message. You can also use the email links."
   }
@@ -424,11 +424,16 @@ contactForm.addEventListener('submit', async (event) => {
       signal: controller.signal,
     });
     if (!response.headers.get('content-type')?.toLowerCase().includes('application/json')) {
+      console.warn('Contact form received a non-JSON response', {
+        status: response.status,
+        contentType: response.headers.get('content-type'),
+      });
       setContactStatus('formUncertain');
       return;
     }
     const result = await response.json();
     if (!result || typeof result !== 'object' || Array.isArray(result)) {
+      console.warn('Contact form received an invalid response body', { status: response.status });
       setContactStatus('formUncertain');
       return;
     }
@@ -440,12 +445,21 @@ contactForm.addEventListener('submit', async (event) => {
     }
     const accepted = result.success === true || result.success === 'true';
     if (!response.ok || !accepted || result.error || result.errors) {
-      setContactStatus('formError');
+      console.warn('FormSubmit did not confirm the contact submission', {
+        status: response.status,
+        success: result.success,
+        hasError: Boolean(result.error),
+        hasErrors: Boolean(result.errors),
+      });
+      setContactStatus('formUncertain');
       return;
     }
     contactForm.reset();
     setContactStatus('formSuccess');
-  } catch {
+  } catch (error) {
+    console.warn('Contact form confirmation is unavailable', {
+      name: error && error.name ? error.name : 'UnknownError',
+    });
     setContactStatus('formUncertain');
   } finally {
     clearTimeout(timeout);

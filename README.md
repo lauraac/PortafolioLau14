@@ -31,11 +31,11 @@ El envío se realiza directamente desde el navegador con FormSubmit; no requiere
 
 El formulario env?a JSON mediante fetch al endpoint AJAX de FormSubmit: https://formsubmit.co/ajax/lauraac140231@gmail.com. El destino sigue siendo Gmail; el correo alternativo y el tel?fono son enlaces directos. No requiere backend propio y utiliza el mecanismo cross-origin documentado para sitios est?ticos como GitHub Pages.
 
-- El visitante permanece dentro del portafolio. Los estados de env?o, aceptaci?n, activaci?n pendiente, error y confirmaci?n incierta est?n en espa?ol e ingl?s.
+- El visitante permanece dentro del portafolio. Ante una respuesta no aceptada o no disponible, se muestra un aviso amable de confirmaci?n pendiente; el detalle t?cnico se registra en la consola sin incluir los datos del formulario.
 - El bot?n se deshabilita mientras hay una solicitud pendiente y el manejador impide env?os simult?neos. No hay reintentos autom?ticos.
 - Solo se muestra aceptaci?n si el HTTP es correcto, el cuerpo es JSON y success es exactamente true o la cadena "true", sin error ni aviso de activaci?n. HTTP 200 y la cadena "false" no bastan.
 - El formulario se limpia solo tras aceptaci?n expl?cita. Ante error o falta de confirmaci?n conserva el texto. Aceptaci?n del servicio no prueba entrega en la bandeja de entrada.
-- La espera m?xima es de 20 segundos. Si se agota o falla la comunicaci?n, un aviso amable explica que el mensaje pudo haberse enviado y pide esperar antes de reenviar para evitar duplicados; el texto se conserva.
+- La espera m?xima es de 20 segundos. Si se agota, falla la comunicaci?n o FormSubmit no confirma la solicitud, el texto se conserva y se pide esperar antes de reenviar para evitar duplicados; el aviso no afirma que el correo se haya entregado.
 - Para evitar la pantalla externa de reCAPTCHA se usa _captcha=false y un honeypot _honey. No equivale a conservar el desaf?o visual de reCAPTCHA.
 - Requiere JavaScript y HTTP/HTTPS. Sin JavaScript el bot?n permanece deshabilitado y hay enlaces de correo disponibles.
 

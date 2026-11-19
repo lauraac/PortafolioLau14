@@ -27,7 +27,9 @@ function setup(scenario, { valid = true, protocol = 'https:', honey = '' } = {})
     field.validity.valid = name !== 'email' || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
   }
   const requests = [];
+  const diagnostics = [];
   const context = {
+    console: { warn(...args) { diagnostics.push(args); } },
     document: { documentElement: { lang: 'es' }, querySelector(selector) { return selector.includes('data-active-certificate') ? null : select(selector); }, querySelectorAll() { return []; }, getElementById() { return null; }, addEventListener() {} },
     window: { location: { protocol, href: 'https://example.github.io/portfolio/#contacto' }, matchMedia() { return { matches: false, addEventListener() {} }; } },
     FormData: function() {
@@ -53,7 +55,7 @@ function setup(scenario, { valid = true, protocol = 'https:', honey = '' } = {})
   const submit = () => form.events.submit({ preventDefault() { prevented++; } });
   const language = lang => vm.runInContext(`setLanguage('${lang}')`,context);
   const key = () => vm.runInContext('contactStatusKey',context);
-  return { form, button, status, requests, submit, language, key, field: name => select('form [name="' + name + '"]'), prevented: () => prevented };
+  return { form, button, status, requests, diagnostics, submit, language, key, field: name => select('form [name="' + name + '"]'), prevented: () => prevented };
 }
 (async () => {
   for (const scenario of ['accepted-string','accepted-boolean','activation','activation-with-true','false-string','false-boolean','missing-success','unexpected-success','conflicting-error','conflicting-errors','http-500','rate-limit','html-activation','invalid-json','null-json','array-json','redirect','disconnect','timeout']) {
@@ -68,10 +70,14 @@ function setup(scenario, { valid = true, protocol = 'https:', honey = '' } = {})
     await env.submit(); assert.equal(env.requests.length,1,'No concurrent duplicate requests');
     await pending;
     const accepted = scenario.startsWith('accepted-');
-    const uncertain = ['html-activation','invalid-json','null-json','array-json','redirect','disconnect','timeout'].includes(scenario);
-    const expected = accepted ? 'formSuccess' : scenario.startsWith('activation') ? 'formActivation' : uncertain ? 'formUncertain' : 'formError';
+    const activation = scenario.startsWith('activation');
+    const expected = accepted ? 'formSuccess' : activation ? 'formActivation' : 'formUncertain';
     assert.equal(env.key(),expected,scenario);
-    assert.equal(env.status.dataset.state,accepted ? 'success' : uncertain ? 'uncertain' : 'error',scenario);
+    assert.equal(env.status.dataset.state,accepted ? 'success' : activation ? 'error' : 'uncertain',scenario);
+    if (!accepted && !activation) {
+      assert.ok(env.diagnostics.length, 'Log a diagnostic for an unconfirmed submission');
+      assert.equal(JSON.stringify(env.diagnostics).includes('qa@example.com'), false, 'Never log contact details');
+    }
     assert.equal(env.form.resetCount,accepted ? 1 : 0,'Keep the draft unless acceptance is explicit');
     assert.equal(env.button.disabled,false);
     assert.equal(env.form.attributes['aria-busy'],'false');
