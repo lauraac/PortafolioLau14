@@ -68,9 +68,10 @@ function setup(scenario, { valid = true, protocol = 'https:', honey = '' } = {})
     await env.submit(); assert.equal(env.requests.length,1,'No concurrent duplicate requests');
     await pending;
     const accepted = scenario.startsWith('accepted-');
-    const expected = accepted ? 'formSuccess' : scenario.startsWith('activation') ? 'formActivation' : scenario === 'timeout' ? 'formTimeout' : 'formError';
+    const uncertain = ['html-activation','invalid-json','null-json','array-json','redirect','disconnect','timeout'].includes(scenario);
+    const expected = accepted ? 'formSuccess' : scenario.startsWith('activation') ? 'formActivation' : uncertain ? 'formUncertain' : 'formError';
     assert.equal(env.key(),expected,scenario);
-    assert.equal(env.status.dataset.state,accepted ? 'success' : 'error',scenario);
+    assert.equal(env.status.dataset.state,accepted ? 'success' : uncertain ? 'uncertain' : 'error',scenario);
     assert.equal(env.form.resetCount,accepted ? 1 : 0,'Keep the draft unless acceptance is explicit');
     assert.equal(env.button.disabled,false);
     assert.equal(env.form.attributes['aria-busy'],'false');

@@ -748,7 +748,7 @@ h3 {
 .form-honeypot { display: none; }
 .form-status { margin: 0; overflow-wrap: anywhere; }
 .form-status:not(:empty) { padding: 14px 16px; border: 1px solid var(--line); border-radius: 10px; background: #ffffff06; }
-.form-status[data-state="success"] { border-color: var(--blue); color: var(--text); }
+.form-status[data-state="success"], .form-status[data-state="uncertain"] { border-color: var(--blue); color: var(--text); }
 .form-status[data-state="error"] { border-color: #ff80b7; color: #ffb6d6; }
 .form-status[data-state="pending"] { border-color: var(--purple); color: var(--muted); }
 

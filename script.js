@@ -127,7 +127,7 @@ const translations = {
     "formSuccess": "FormSubmit aceptó tu mensaje. ¡Gracias por contactarme!",
     "formError": "No se pudo confirmar el envío. Tu texto se conserva; puedes intentarlo más tarde o escribirme directamente por correo.",
     "formActivation": "El formulario aún requiere activar el correo de destino en FormSubmit. No se ha confirmado el envío. Por favor, contacta a Laura directamente por correo.",
-    "formTimeout": "El servicio tardó demasiado en responder y no podemos confirmar el envío. Tu texto se conserva. Antes de reenviar, espera un momento para evitar duplicados.",
+    "formUncertain": "¡Gracias por escribir! No recibimos confirmación del servicio; es posible que tu mensaje ya se haya enviado. Espera unos minutos antes de volver a intentarlo para evitar duplicados.",
     "formUnavailable": "Para enviar sin salir de esta página, activa JavaScript o utiliza los enlaces de correo.",
     "formLocal": "Abre el portafolio desde su dirección web para enviar el mensaje. También puedes usar los enlaces de correo."
   },
@@ -257,7 +257,7 @@ const translations = {
     "formSuccess": "FormSubmit accepted your message. Thank you for reaching out!",
     "formError": "We could not confirm your submission. Your text has been kept; try again later or email me directly.",
     "formActivation": "This form still requires activation of the recipient email address in FormSubmit. Submission has not been confirmed. Please email Laura directly.",
-    "formTimeout": "The service took too long to respond, so we cannot confirm submission. Your text has been kept. Please wait before resending to avoid duplicates.",
+    "formUncertain": "Thanks for reaching out! We didn't receive confirmation from the service, so your message may already have been sent. Please wait a few minutes before trying again to avoid duplicates.",
     "formUnavailable": "To send without leaving this page, enable JavaScript or use the email links.",
     "formLocal": "Open the portfolio at its web address to send your message. You can also use the email links."
   }
@@ -279,7 +279,11 @@ function renderContactState() {
   contactButton.disabled = contactSending;
   contactForm.setAttribute('aria-busy', String(contactSending));
   contactStatus.textContent = contactStatusKey ? translations[currentLanguage][contactStatusKey] : '';
-  contactStatus.dataset.state = contactStatusKey === 'formSuccess' ? 'success' : contactSending ? 'pending' : contactStatusKey ? 'error' : '';
+  contactStatus.dataset.state = contactStatusKey === 'formSuccess'
+    ? 'success'
+    : contactStatusKey === 'formUncertain'
+      ? 'uncertain'
+      : contactSending ? 'pending' : contactStatusKey ? 'error' : '';
 }
 
 function setContactStatus(key) {
@@ -420,10 +424,14 @@ contactForm.addEventListener('submit', async (event) => {
       signal: controller.signal,
     });
     if (!response.headers.get('content-type')?.toLowerCase().includes('application/json')) {
-      throw new Error('Expected a FormSubmit JSON response');
+      setContactStatus('formUncertain');
+      return;
     }
     const result = await response.json();
-    if (!result || typeof result !== 'object' || Array.isArray(result)) throw new Error('Invalid response');
+    if (!result || typeof result !== 'object' || Array.isArray(result)) {
+      setContactStatus('formUncertain');
+      return;
+    }
     const message = typeof result.message === 'string' ? result.message : '';
     // Activation can be reported with HTTP 200. Never treat a truthy string "false" as acceptance.
     if (/activat|actived|check.{0,20}(?:e-?mail|inbox)|confirm.{0,30}(?:e-?mail|address)|verif.{0,30}(?:e-?mail|address)/i.test(message)) {
@@ -431,11 +439,14 @@ contactForm.addEventListener('submit', async (event) => {
       return;
     }
     const accepted = result.success === true || result.success === 'true';
-    if (!response.ok || !accepted || result.error || result.errors) throw new Error('Submission not accepted');
+    if (!response.ok || !accepted || result.error || result.errors) {
+      setContactStatus('formError');
+      return;
+    }
     contactForm.reset();
     setContactStatus('formSuccess');
-  } catch (error) {
-    setContactStatus(error.name === 'AbortError' ? 'formTimeout' : 'formError');
+  } catch {
+    setContactStatus('formUncertain');
   } finally {
     clearTimeout(timeout);
     contactSending = false;
